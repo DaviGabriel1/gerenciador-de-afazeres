@@ -1,0 +1,38 @@
+{
+  "name": "api-gerenciador-de-afazeres",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "ts-node-dev src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaviGabriel1/gerenciador-de-afazeres.git"
+  },
+  "author": "DaviGabriel1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaviGabriel1/gerenciador-de-afazeres/issues"
+  },
+  "homepage": "https://github.com/DaviGabriel1/gerenciador-de-afazeres#readme",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.96",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "globals": "^15.14.0",
+    "ntypescript": "^1.201706190042.1",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.22.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.6"
+  }
+}
