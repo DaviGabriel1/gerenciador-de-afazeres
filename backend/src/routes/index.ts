@@ -2,8 +2,7 @@ import {Router, Request, Response} from "express";
 
 const router = Router();
 
-router.get("/teste",(req:Request,res:Response) => {
-    res.send({message: "teste"});
+router.get("/tasks",(req:Request,res:Response) => {
 })
 
 export default router;
