@@ -7,18 +7,12 @@ const taskController = new TaskController(taskRepository);
 
 const router = Router();
 
-router.get("/tasks",taskController.findTasks);
+router.get("/tasks",(req:Request,res:Response) => taskController.findTasks(req,res));
 
-router.post("/tasks",(req:Request,res:Response) => {
+router.post("/tasks",(req:Request,res:Response) => taskController.createTasks(req,res));
 
-})
+router.put("/tasks/:id",(req:Request,res:Response) => taskController.updateTask(req,res));
 
-router.put("/tasks/:id",(req:Request,res:Response) => {
-
-})
-
-router.delete("/tasks/:id",(req:Request,res:Response) => {
-
-})
+router.delete("/tasks/:id",(req:Request,res:Response) => taskController.deleteTask(req,res));
 
 export default router;

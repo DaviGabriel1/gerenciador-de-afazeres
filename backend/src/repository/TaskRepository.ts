@@ -5,15 +5,15 @@ import { Task } from "../models/Task";
 export interface ITaskRepository {
     getTasks(): Promise<ITask[]>;
     createTask(task: ICreateTaskParams): Promise<ITask>;
-    updateTask(id: string, task: Partial<ICreateTaskParams>): Promise<ITask | null>;
+    updateTask(id: string, task: ICreateTaskParams): Promise<ITask | null>;
     deleteTask(id: string): Promise<boolean>;
 }
 
 export class TaskRepository implements ITaskRepository {
+    constructor(){}
     
     async getTasks(): Promise<ITask[]> {
         const tasks = await Task.find();
-        console.log(tasks);
         return tasks;   
     }
 
@@ -24,7 +24,7 @@ export class TaskRepository implements ITaskRepository {
     }
 
     async updateTask(id: string, task: Partial<ICreateTaskParams>): Promise<ITask | null> {
-        const updatedTask = await Task.findByIdAndUpdate(id, task, { new: true }); // ✅ Adicionado await
+        const updatedTask = await Task.findByIdAndUpdate(id, task, { new: true });
         return updatedTask; 
     }
 
