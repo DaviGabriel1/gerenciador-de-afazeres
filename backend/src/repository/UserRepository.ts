@@ -4,11 +4,19 @@ type UserCreationAttributes = Omit<UserAttributes, "id" | "createdAt" | "updated
 type UserUpdateAttributes = Omit<UserAttributes, "createdAt" | "updatedAt">;
 
 export interface IUserRepository {
-  createUser(user: UserCreationAttributes): Promise<User>;
-  updateUser(user: UserUpdateAttributes): Promise<User>;
+    findAll():Promise<User[]>;
+    createUser(user: UserCreationAttributes): Promise<User>;
+    updateUser(user: UserUpdateAttributes): Promise<User>;
+    deleteUser(id:string): Promise<boolean>;
 }
 
 export class UserRepository implements IUserRepository {
+    public async findAll(): Promise<User[]>{
+        const users = await User.findAll();
+        return users;
+    }
+
+
   public async createUser(user: UserCreationAttributes): Promise<User> {
     console.log(user);
     
@@ -31,5 +39,15 @@ export class UserRepository implements IUserRepository {
     updatedUser.level = user.level ? user.level : updatedUser.level;
     await updatedUser.save();
     return updatedUser;
+  }
+
+  public async deleteUser(id:string): Promise<boolean>{
+    const user = await User.findByPk(id);
+
+    if(!user){
+        return false;
+    }
+    await user.destroy();
+    return true;
   }
 }

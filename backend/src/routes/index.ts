@@ -27,7 +27,9 @@ router.delete("/tasks/:id",validateToken,validateId,(req:Request,res:Response) =
 
 // ROTAS USERS
 
+router.get("/users",validateToken,(req:Request,res:Response) => userController.findAllUsers(req,res));
 router.post("/users",validateToken,validateUser,(req:Request,res:Response) => userController.createUser(req,res));
 router.put("/users",validateToken,validateUser,(req:Request,res:Response) => userController.updateUser(req,res));
+router.delete("/users/:id",validateToken,(req:Request,res:Response) => userController.deleteUser(req,res));
 
 export default router;

@@ -7,6 +7,17 @@ export class UserController {
 
     constructor(private readonly userRepository: IUserRepository){}
 
+    async findAllUsers(req:Request,res:Response){
+        try{
+            const users = await this.userRepository.findAll();
+            res.status(StatusCodes.OK).json(users);
+        }
+        catch(error){
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "erro interno do servidor"+error});
+        }
+    }
+
+
     async createUser(req:Request,res:Response){
         try{
             const userBody: any = req.body;
@@ -34,7 +45,7 @@ export class UserController {
             const userBody = req.body;
 
         if(!userBody?.id){
-            res.status(StatusCodes.BAD_REQUEST).json({message: "id não encontrado"})
+            res.status(StatusCodes.NOT_FOUND).json({message: "id não encontrado"})
             return;
         }
 
@@ -46,7 +57,35 @@ export class UserController {
             res.status(StatusCodes.BAD_REQUEST).json({message: "esse email já está sendo utilizado em outra conta"});
             }
             else{
-                res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "erro interno do servidor"});
+                res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "erro interno do servidor: "+error});
+            }
+        }
+    }
+
+    async deleteUser(req:Request,res:Response){
+        try{
+            const id = req.params.id;
+
+        if(!id){
+            res.status(StatusCodes.NOT_FOUND).json({message: "id não encontrado"})
+            return;
+        }
+
+        const flag = await this.userRepository.deleteUser(id);
+
+        if(!flag){
+            res.status(StatusCodes.NOT_FOUND).json({message: "usuário não encontrado"});
+        }
+        else{
+            res.status(StatusCodes.NO_CONTENT).end();
+        }
+        }
+        catch(error){
+            if(error instanceof UniqueConstraintError){
+            res.status(StatusCodes.BAD_REQUEST).json({message: "esse email já está sendo utilizado em outra conta"});
+            }
+            else{
+                res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({message: "erro interno do servidor: "+error});
             }
         }
     }
