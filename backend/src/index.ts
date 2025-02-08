@@ -2,12 +2,14 @@ import express from "express";
 import {config} from "dotenv";
 import cors from "cors";
 
-import { connectDB } from "./config/database";
+import { connectMongo,connectMySQL } from "./config/database";
 import router from "./routes";
 
 config();
 
-connectDB();
+connectMongo();
+connectMySQL();
+
 
 const app = express();
 

@@ -20,7 +20,7 @@ const fileSchema = z.object({
     })
 })
 
-export const validateBody = (req:Request,res:Response,next:NextFunction) => {
+export const validateTask = (req:Request,res:Response,next:NextFunction) => {
     const validateFields = fileSchema.safeParse(req.body);
 
     if(!validateFields.success){
