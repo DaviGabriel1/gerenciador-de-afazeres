@@ -18,11 +18,8 @@ const router = Router();
 
 // ROTAS TASKS
 router.get("/tasks",validateToken,(req:Request,res:Response) => taskController.findTasks(req,res));
-
 router.post("/tasks",validateToken,validateTask,(req:Request,res:Response) => taskController.createTasks(req,res));
-
 router.put("/tasks/:id",validateToken,validateTask,validateId,(req:Request,res:Response) => taskController.updateTask(req,res));
-
 router.delete("/tasks/:id",validateToken,validateId,(req:Request,res:Response) => taskController.deleteTask(req,res));
 
 // ROTAS USERS

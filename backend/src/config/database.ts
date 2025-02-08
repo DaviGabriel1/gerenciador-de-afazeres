@@ -27,10 +27,11 @@ export const sequelize = new Sequelize(
       port: Number(process.env.MYSQL_PORT) || 3306,
       logging: false,
     }
-  );
+);
 
 export const connectMySQL = async () => {
     try {
+        console.log(sequelize)
       await sequelize.authenticate();
       console.log("MySQL conectado!");
     } catch (error) {
