@@ -51,7 +51,5 @@ export class UserController {
         }
     }
 
-    async find
-
     
 }
