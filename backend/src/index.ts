@@ -3,7 +3,8 @@ import {config} from "dotenv";
 import cors from "cors";
 
 import { connectMongo,connectMySQL } from "./config/database";
-import router from "./routes";
+import eventRouter from "./routes/events";
+import authRouter from "./routes/auth";
 
 config();
 
@@ -17,7 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use("/api",router);
+app.use("/api",eventRouter);
+app.use("/auth",authRouter);
 
 const port = process.env.PORT || 8000;
 

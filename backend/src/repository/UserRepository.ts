@@ -1,11 +1,9 @@
 import User, { UserAttributes } from "../models/User"
 
-type UserCreationAttributes = Omit<UserAttributes, "id" | "createdAt" | "updatedAt">;
 type UserUpdateAttributes = Omit<UserAttributes, "createdAt" | "updatedAt">;
 
 export interface IUserRepository {
     findAll():Promise<User[]>;
-    createUser(user: UserCreationAttributes): Promise<User>;
     updateUser(user: UserUpdateAttributes): Promise<User>;
     deleteUser(id:string): Promise<boolean>;
 }
@@ -15,15 +13,6 @@ export class UserRepository implements IUserRepository {
         const users = await User.findAll();
         return users;
     }
-
-
-  public async createUser(user: UserCreationAttributes): Promise<User> {
-    console.log(user);
-    
-    const newUser = await User.create(user);
-    
-    return newUser;
-  }
 
   public async updateUser(user: UserUpdateAttributes): Promise<User>{
     const updatedUser = await User.findByPk(user.id);
